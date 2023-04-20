@@ -1,0 +1,31 @@
+{
+  "name": "fullstack-lab2",
+  "version": "1.0.0",
+  "description": "Second lab",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "runServer": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fera13/Fullstack-Lab2.git"
+  },
+  "author": "Farah Mallah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fera13/Fullstack-Lab2/issues"
+  },
+  "homepage": "https://github.com/Fera13/Fullstack-Lab2#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "node.js": "^0.0.1-security",
+    "nodemon": "^2.0.22"
+  }
+}
