@@ -4,10 +4,13 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const album = require("./Albums");
+const cors = require("cors");
 require("dotenv").config();
 
 const port = process.env.PORT || 3000;
 const uri = process.env.URI;
+
+app.use(cors({ origin: "*" }));
 
 app.use(express.json());
 app.use(bodyParser.json());
