@@ -12,7 +12,7 @@ async function showAlbums() {
     oldRows.forEach((row) => {
       row.remove();
     });
-    await fetch(`http://localhost:3000/api/albums`, {
+    await fetch(`https://my-albums.onrender.com/api/albums`, {
       method: "GET",
     })
       .then((response) => {
@@ -46,10 +46,13 @@ showAlbums();
 async function handleDelete(rowId) {
   try {
     errorSpace.innerHTML = "";
-    const response = await fetch(`http://localhost:3000/api/albums/${rowId}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://my-albums.onrender.com/api/albums/${rowId}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (response.status === 404) {
       errorSpace.textContent = "Failed to delete. The album wasn't found.";
@@ -98,15 +101,18 @@ async function doTheUpdate(rowId) {
   const newArtist = document.querySelector("#up-artistText").value;
   const newYear = document.querySelector("#up-yearText").value;
   try {
-    const response = await fetch(`http://localhost:3000/api/albums/${rowId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: newTitle,
-        artist: newArtist,
-        year: newYear,
-      }),
-    });
+    const response = await fetch(
+      `https://my-albums.onrender.com/api/albums/${rowId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: newTitle,
+          artist: newArtist,
+          year: newYear,
+        }),
+      }
+    );
 
     if (response.status === 404) {
       errorSpace.textContent = "Failed to update. The album wasn't found.";
@@ -121,10 +127,13 @@ async function doTheUpdate(rowId) {
 
 async function handleShowingDetails(event, title) {
   try {
-    const response = await fetch(`http://localhost:3000/api/albums/${title}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://my-albums.onrender.com/api/albums/${title}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const result = await response.json();
     const albums = Promise.resolve(result);
 
@@ -168,7 +177,7 @@ create.addEventListener("click", () => {
   }
 
   // Send a POST request to create a new album
-  fetch("http://localhost:3000/api/albums", {
+  fetch("https://my-albums.onrender.com/api/albums", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -213,53 +222,3 @@ async function addAlbumRow(album) {
   row.innerHTML = content;
   myTableBody.appendChild(row);
 }
-/*try {
-  document.addEventListener("DOMContentLoaded", () => {
-    // Select the necessary elements from the HTML
-    const createAlbumBtn = document.querySelector("#createAlbumBtn");
-    const titleText = document.querySelector("#titleText");
-    const artistText = document.querySelector("#artistText");
-    const yearText = document.querySelector("#yearText");
-    const errorSpace = document.querySelector(".error-space");
-
-    // Function to check if a string is empty
-    const isEmpty = (str) => !str.trim().length;
-
-    // Function to handle form submission
-    const handleSubmit = () => {
-      // Check if any input fields are empty
-      if (
-        isEmpty(titleText.value) ||
-        isEmpty(artistText.value) ||
-        isEmpty(yearText.value)
-      ) {
-        errorSpace.textContent = "Please fill out all fields.";
-        return;
-      }
-
-      // Send a POST request to create a new album
-      fetch("http://localhost:3000/api/albums", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: titleText.value,
-          artist: artistText.value,
-          year: yearText.value,
-        }),
-      })
-        .then((response) => {
-          console.log("Response:", response);
-          return response.json();
-        })
-        .then((newAlbum) => {
-          // Clear the input fields and error message
-          titleText.value = "";
-          artistText.value = "";
-          yearText.value = "";
-          errorSpace.textContent = "";
-
-          // Add the new album to the table
-          addAlbumRow(newAlbum);
-        })
-        .catch((error) => console.error("Error creating album:", error));
-    };*/
